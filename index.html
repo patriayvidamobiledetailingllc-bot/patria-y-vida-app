@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patria y Vida Mobile Detailing</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #101010;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #181818;
+    }
+    h1 { margin-bottom: 10px; }
+    .tagline { color: #d6b77b; }
+    main {
+      max-width: 700px;
+      margin: auto;
+      padding: 24px 16px;
+    }
+    h2 { text-align: center; }
+    .service {
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .service h3 { color: #d6b77b; }
+    .price {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #444;
+    }
+    .price strong { white-space: nowrap; }
+    .booking {
+      display: block;
+      text-align: center;
+      background: #d6b77b;
+      color: #111;
+      padding: 16px;
+      margin: 28px 0;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .message { text-align: center; color: #ccc; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Patria y Vida Mobile Detailing LLC</h1>
+    <p class="tagline">Freedom in every detail</p>
+  </header>
+
+  <main>
+    <h2>Our Services & Prices</h2>
+    <p id="status" class="message">Loading services...</p>
+    <div id="services"></div>
+
+    <a class="booking"
+       href="https://squareup.com/appointments/book/L3XMGN36HM3RP/start">
+      Book Your Appointment
+    </a>
+  </main>
+
+  <script>
+    const BASE = "https://uwnqixujbmftqzcvjfpw.supabase.co";
+    const KEY = "sb_publishable_5F9HbgTARRJZOUOQhsvLtw_PyAaayX0";
+
+    const headers = {
+      "apikey": KEY
+    };
+
+    async function getData(table) {
+      const response = await fetch(
+        BASE + "/rest/v1/" + table + "?select=*",
+        { headers }
+      );
+      if (!response.ok) throw new Error("Could not load " + table);
+      return response.json();
+    }
+
+    function addText(parent, tag, text) {
+      const element = document.createElement(tag);
+      element.textContent = text;
+      parent.appendChild(element);
+      return element;
+    }
+
+    async function loadServices() {
+      const container = document.getElementById("services");
+      const status = document.getElementById("status");
+
+      try {
+        const [services, prices] = await Promise.all([
+          getData("services"),
+          getData("service_prices")
+        ]);
+
+        status.textContent = "";
+        container.replaceChildren();
+
+        if (!services.length) {
+          status.textContent = "Services coming soon.";
+          return;
+        }
+
+        for (const service of services) {
+          const card = document.createElement("section");
+          card.className = "service";
+
+          addText(card, "h3", service.name || "Service");
+
+          if (service.description) {
+            addText(card, "p", service.description);
+          }
+
+          const matching = prices.filter(
+            p => String(p.service_id) === String(service.id)
+          );
+
+          for (const item of matching) {
+            const line = document.createElement("div");
+            line.className = "price";
+            addText(line, "span", item.vehicle_type || "Vehicle");
+            addText(line, "strong", "$" + Number(item.price).toFixed(2));
+            card.appendChild(line);
+          }
+
+          container.appendChild(card);
+        }
+      } catch (error) {
+        status.textContent =
+          "Services are temporarily unavailable. Please try again later.";
+        console.error(error);
+      }
+    }
+
+    loadServices();
+  </script>
+</body>
+</html>
