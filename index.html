@@ -127,7 +127,13 @@
           const matching = prices.filter(
             p => String(p.service_id) === String(service.id)
           );
-
+if (service.price !== null && service.price !== undefined) {
+  const line = document.createElement("div");
+  line.className = "price";
+  addText(line, "span", "Fixed Price");
+  addText(line, "strong", "$" + Number(service.price).toFixed(2));
+  card.appendChild(line);
+}
           for (const item of matching) {
             const line = document.createElement("div");
             line.className = "price";
