@@ -4,28 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Patria y Vida Mobile Detailing</title>
+  <meta name="theme-color" content="#101010">
+  <title>Patria y Vida Mobile Detailing LLC</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: #101010;
       color: white;
       font-family: Arial, sans-serif;
     }
+
     header {
       text-align: center;
       padding: 40px 20px;
       background: #181818;
     }
-    h1 { margin-bottom: 10px; }
-    .tagline { color: #d6b77b; }
+
+    .logo {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      margin: 0 auto 24px;
+      border-radius: 14px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 7vw, 42px);
+      line-height: 1.2;
+    }
+
+    .tagline {
+      color: #d6b77b;
+      font-size: 18px;
+    }
+
     main {
       max-width: 700px;
       margin: auto;
       padding: 24px 16px;
     }
-    h2 { text-align: center; }
+
+    h2 {
+      text-align: center;
+      margin: 20px 0 28px;
+    }
+
     .service {
       background: #222;
       border: 1px solid #444;
@@ -33,18 +63,37 @@
       padding: 20px;
       margin: 16px 0;
     }
-    .service h3 { color: #d6b77b; }
+
+    .service h3 {
+      color: #d6b77b;
+      font-size: 22px;
+      overflow-wrap: anywhere;
+    }
+
+    .service p {
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
     .price {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-bottom: 1px solid #444;
     }
+
+    .price span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
     .price strong {
       white-space: nowrap;
+      color: white;
     }
+
     .booking {
       display: block;
       text-align: center;
@@ -56,33 +105,59 @@
       font-weight: bold;
       text-decoration: none;
     }
+
     .message {
       text-align: center;
       color: #ccc;
     }
+
+    footer {
+      text-align: center;
+      padding: 25px 16px;
+      color: #d6b77b;
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <img src="file_00000000a588720c9110012324fce92d.png" alt="Patria y Vida Mobile Detailing" style="width:180px;max-width:90%;height:auto;border-radius:12px;">
+    <img
+      class="logo"
+      src="file_00000000a588720c9110012324fce92d.png"
+      alt="Patria y Vida Mobile Detailing LLC logo"
+    >
+
     <h1>Patria y Vida Mobile Detailing LLC</h1>
     <p class="tagline">Freedom in every detail</p>
   </header>
 
   <main>
-    <h2>Our Services & Prices</h2>
-    <p id="status" class="message">Loading services...</p>
+    <h2>Our Services &amp; Prices</h2>
+
+    <p id="status" class="message">
+      Loading services...
+    </p>
+
     <div id="services"></div>
 
-    <a class="booking"
-       href="https://squareup.com/appointments/book/L3XMGN36HM3RP/start">
+    <a
+      class="booking"
+      href="https://squareup.com/appointments/book/L3XMGN36HM3RP/start"
+    >
       Book Your Appointment
     </a>
   </main>
 
+  <footer>
+    Freedom in every detail
+  </footer>
+
   <script>
-    const BASE = "https://uwnqixujbmftqzcvjfpw.supabase.co";
-    const KEY = "sb_publishable_5F9HbgTARRJZOUOQhsvLtw_PyAaayX0";
+    const BASE =
+      "https://uwnqixujbmftqzcvjfpw.supabase.co";
+
+    const KEY =
+      "sb_publishable_5F9HbgTARRJZOUOQhsvLtw_PyAaayX0";
 
     const headers = {
       "apikey": KEY
@@ -95,20 +170,60 @@
       );
 
       if (!response.ok) {
-        throw new Error("Could not load " + table);
+        throw new Error(
+          "Could not load " + table
+        );
       }
 
       return response.json();
     }
 
-    function addText(parent, tag, text) {
+    function addText(parent, tag, value) {
       const element = document.createElement(tag);
-      element.textContent = text;
+      element.textContent = value;
       parent.appendChild(element);
       return element;
     }
 
-    const vehicleOrder = [
+    function normalizeVehicle(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+    }
+
+    function getVehicleCategory(value) {
+      const name = normalizeVehicle(value);
+
+      if (name.includes("sedan")) {
+        return 0;
+      }
+
+      if (
+        name.includes("cargo") ||
+        name.includes("van")
+      ) {
+        return 3;
+      }
+
+      if (
+        name.includes("truck") ||
+        name.includes("3rows") ||
+        name.includes("thirdrow")
+      ) {
+        return 2;
+      }
+
+      if (
+        name.includes("suv") ||
+        name.includes("2rows")
+      ) {
+        return 1;
+      }
+
+      return 99;
+    }
+
+    const vehicleLabels = [
       "Sedan",
       "SUV (2 Rows of Seats)",
       "Truck/SUV (3 Rows of Seats)",
@@ -116,65 +231,89 @@
     ];
 
     function sortVehiclePrices(a, b) {
-      const indexA = vehicleOrder.indexOf(a.vehicle_type);
-      const indexB = vehicleOrder.indexOf(b.vehicle_type);
-
-      const orderA = indexA === -1 ? 999 : indexA;
-      const orderB = indexB === -1 ? 999 : indexB;
-
-      return orderA - orderB;
+      return (
+        getVehicleCategory(a.vehicle_type) -
+        getVehicleCategory(b.vehicle_type)
+      );
     }
 
     function displayPrice(card, label, amount) {
-      if (amount === null ||
-          amount === undefined ||
-          amount === "") {
+      if (
+        amount === null ||
+        amount === undefined ||
+        amount === ""
+      ) {
         return;
       }
 
       const number = Number(amount);
-      if (!Number.isFinite(number)) return;
+
+      if (!Number.isFinite(number)) {
+        return;
+      }
 
       const line = document.createElement("div");
       line.className = "price";
 
       addText(line, "span", label);
-      addText(line, "strong", "$" + number.toFixed(2));
+
+      addText(
+        line,
+        "strong",
+        "$" + number.toFixed(2)
+      );
 
       card.appendChild(line);
     }
 
     async function loadServices() {
-      const container = document.getElementById("services");
-      const status = document.getElementById("status");
+      const container =
+        document.getElementById("services");
+
+      const status =
+        document.getElementById("status");
 
       try {
-        const [services, prices] = await Promise.all([
-          getData("services"),
-          getData("service_prices")
-        ]);
+        const [services, prices] =
+          await Promise.all([
+            getData("services"),
+            getData("service_prices")
+          ]);
 
-        status.textContent = "";
         container.replaceChildren();
+        status.textContent = "";
 
         if (!services.length) {
-          status.textContent = "Services coming soon.";
+          status.textContent =
+            "Services coming soon.";
           return;
         }
 
         for (const service of services) {
-          const card = document.createElement("section");
+          const card =
+            document.createElement("section");
+
           card.className = "service";
 
-          addText(card, "h3", service.name || "Service");
+          addText(
+            card,
+            "h3",
+            service.name || "Service"
+          );
 
           if (service.description) {
-            addText(card, "p", service.description);
+            addText(
+              card,
+              "p",
+              service.description
+            );
           }
 
           const matching = prices
             .filter(
-              p => String(p.service_id) === String(service.id)
+              item =>
+                String(item.service_id) ===
+                String(service.id)
             )
             .sort(sortVehiclePrices);
 
@@ -187,18 +326,30 @@
           }
 
           for (const item of matching) {
+            const category =
+              getVehicleCategory(
+                item.vehicle_type
+              );
+
+            const label =
+              vehicleLabels[category] ||
+              item.vehicle_type ||
+              "Vehicle";
+
             displayPrice(
               card,
-              item.vehicle_type || "Vehicle",
+              label,
               item.price
             );
           }
 
           container.appendChild(card);
         }
+
       } catch (error) {
         status.textContent =
           "Services are temporarily unavailable. Please try again later.";
+
         console.error(error);
       }
     }
