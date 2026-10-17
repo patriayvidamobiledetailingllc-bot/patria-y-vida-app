@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +37,14 @@
     .price {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
       padding: 10px 0;
       border-bottom: 1px solid #444;
     }
-    .price strong { white-space: nowrap; }
+    .price strong {
+      white-space: nowrap;
+    }
     .booking {
       display: block;
       text-align: center;
@@ -52,7 +56,10 @@
       font-weight: bold;
       text-decoration: none;
     }
-    .message { text-align: center; color: #ccc; }
+    .message {
+      text-align: center;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
@@ -85,7 +92,11 @@
         BASE + "/rest/v1/" + table + "?select=*",
         { headers }
       );
-      if (!response.ok) throw new Error("Could not load " + table);
+
+      if (!response.ok) {
+        throw new Error("Could not load " + table);
+      }
+
       return response.json();
     }
 
@@ -94,6 +105,42 @@
       element.textContent = text;
       parent.appendChild(element);
       return element;
+    }
+
+    const vehicleOrder = [
+      "Sedan",
+      "SUV (2 Rows of Seats)",
+      "Truck/SUV (3 Rows of Seats)",
+      "Cargo Vans"
+    ];
+
+    function sortVehiclePrices(a, b) {
+      const indexA = vehicleOrder.indexOf(a.vehicle_type);
+      const indexB = vehicleOrder.indexOf(b.vehicle_type);
+
+      const orderA = indexA === -1 ? 999 : indexA;
+      const orderB = indexB === -1 ? 999 : indexB;
+
+      return orderA - orderB;
+    }
+
+    function displayPrice(card, label, amount) {
+      if (amount === null ||
+          amount === undefined ||
+          amount === "") {
+        return;
+      }
+
+      const number = Number(amount);
+      if (!Number.isFinite(number)) return;
+
+      const line = document.createElement("div");
+      line.className = "price";
+
+      addText(line, "span", label);
+      addText(line, "strong", "$" + number.toFixed(2));
+
+      card.appendChild(line);
     }
 
     async function loadServices() {
@@ -124,22 +171,26 @@
             addText(card, "p", service.description);
           }
 
-          const matching = prices.filter(
-            p => String(p.service_id) === String(service.id)
-          );
-if (service.price !== null && service.price !== undefined) {
-  const line = document.createElement("div");
-  line.className = "price";
-  addText(line, "span", "Fixed Price");
-  addText(line, "strong", "$" + Number(service.price).toFixed(2));
-  card.appendChild(line);
-}
+          const matching = prices
+            .filter(
+              p => String(p.service_id) === String(service.id)
+            )
+            .sort(sortVehiclePrices);
+
+          if (matching.length === 0) {
+            displayPrice(
+              card,
+              "Fixed Price",
+              service.price
+            );
+          }
+
           for (const item of matching) {
-            const line = document.createElement("div");
-            line.className = "price";
-            addText(line, "span", item.vehicle_type || "Vehicle");
-            addText(line, "strong", "$" + Number(item.price).toFixed(2));
-            card.appendChild(line);
+            displayPrice(
+              card,
+              item.vehicle_type || "Vehicle",
+              item.price
+            );
           }
 
           container.appendChild(card);
