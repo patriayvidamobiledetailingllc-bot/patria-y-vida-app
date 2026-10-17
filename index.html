@@ -2,11 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./file_00000000a588720c9110012324fce92d.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101010">
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png"
+    href="./file_00000000a588720c9110012324fce92d.png">
+
   <title>Patria y Vida Mobile Detailing LLC</title>
 
   <style>
@@ -77,6 +80,15 @@
       overflow-wrap: anywhere;
     }
 
+    .service-photo {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+
     .price {
       display: flex;
       justify-content: space-between;
@@ -125,7 +137,7 @@
   <header>
     <img
       class="logo"
-      src="file_00000000a588720c9110012324fce92d.png"
+      src="./file_00000000a588720c9110012324fce92d.png"
       alt="Patria y Vida Mobile Detailing LLC logo"
     >
 
@@ -172,9 +184,7 @@
       );
 
       if (!response.ok) {
-        throw new Error(
-          "Could not load " + table
-        );
+        throw new Error("Could not load " + table);
       }
 
       return response.json();
@@ -302,6 +312,24 @@
             "h3",
             service.name || "Service"
           );
+
+          // Service photo from Supabase
+          if (service.image_url) {
+            const photo =
+              document.createElement("img");
+
+            photo.className = "service-photo";
+            photo.src = service.image_url;
+            photo.alt =
+              service.name || "Detailing service";
+            photo.loading = "lazy";
+
+            photo.onerror = function () {
+              photo.style.display = "none";
+            };
+
+            card.appendChild(photo);
+          }
 
           if (service.description) {
             addText(
