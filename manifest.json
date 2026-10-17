@@ -1,0 +1,17 @@
+{
+  "name": "Patria y Vida Mobile Detailing LLC",
+  "short_name": "Patria y Vida",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "icons": [
+    {
+      "src": "./file_00000000a588720c9110012324fce92d.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
