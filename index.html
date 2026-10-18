@@ -1,390 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101010">
-
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png"
-    href="./file_00000000a588720c9110012324fce92d.png">
-
-  <title>Patria y Vida Mobile Detailing LLC</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #101010;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      text-align: center;
-      padding: 40px 20px;
-      background: #181818;
-    }
-
-    .logo {
-      display: block;
-      width: 100%;
-      max-width: 220px;
-      height: auto;
-      margin: 0 auto 24px;
-      border-radius: 14px;
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(28px, 7vw, 42px);
-      line-height: 1.2;
-    }
-
-    .tagline {
-      color: #d6b77b;
-      font-size: 18px;
-    }
-
-    main {
-      max-width: 700px;
-      margin: auto;
-      padding: 24px 16px;
-    }
-
-    h2 {
-      text-align: center;
-      margin: 20px 0 28px;
-    }
-
-    .service {
-      background: #222;
-      border: 1px solid #444;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 16px 0;
-    }
-
-    .service h3 {
-      color: #d6b77b;
-      font-size: 22px;
-      overflow-wrap: anywhere;
-    }
-
-    .service p {
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    .service-photo {
-      display: block;
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin: 12px 0;
-    }
-
-    .price {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #444;
-    }
-
-    .price span {
-      min-width: 0;
-      overflow-wrap: anywhere;
-    }
-
-    .price strong {
-      white-space: nowrap;
-      color: white;
-    }
-
-    .booking {
-      display: block;
-      text-align: center;
-      background: #d6b77b;
-      color: #111;
-      padding: 16px;
-      margin: 28px 0;
-      border-radius: 10px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .message {
-      text-align: center;
-      color: #ccc;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 16px;
-      color: #d6b77b;
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101010">
+<link rel="manifest" href="./manifest.json"><link rel="icon" type="image/png" href="./file_00000000a588720c9110012324fce92d.png">
+<title>Patria y Vida Mobile Detailing LLC</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}header{text-align:center;padding:40px 20px;background:#181818}.logo{display:block;width:100%;max-width:220px;height:auto;margin:0 auto 24px;border-radius:14px}h1{margin:0 0 16px;font-size:clamp(28px,7vw,42px);line-height:1.2}.tagline{color:#d6b77b;font-size:18px}main{max-width:700px;margin:auto;padding:24px 16px}h2{text-align:center;margin:20px 0 28px}.service,.booking-panel{background:#222;border:1px solid #444;border-radius:12px;padding:20px;margin:16px 0}.service h3{color:#d6b77b;font-size:22px;overflow-wrap:anywhere}.service p{line-height:1.6;overflow-wrap:anywhere}.service-photo{display:block;width:100%;height:220px;object-fit:cover;border-radius:10px;margin:12px 0}.price{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #444}.price span{min-width:0;overflow-wrap:anywhere}.price strong{white-space:nowrap;color:white}.booking,button.primary{display:block;width:100%;text-align:center;background:#d6b77b;color:#111;padding:16px;margin:22px 0;border:0;border-radius:10px;font-size:16px;font-weight:bold;text-decoration:none;cursor:pointer}.booking:disabled,button:disabled{opacity:.55;cursor:not-allowed}.message{text-align:center;color:#ccc}footer{text-align:center;padding:25px 16px;color:#d6b77b}label{display:block;margin:16px 0 7px;font-weight:bold}input,select,textarea{display:block;width:100%;border:1px solid #777;background:#161616;color:white;border-radius:8px;padding:13px;font:inherit;color-scheme:dark}textarea{min-height:85px;resize:vertical}.note{font-size:14px;color:#ddd;line-height:1.6}.warning{background:#302819;border:1px solid #8d7340;border-radius:9px;padding:13px;color:#f1dfba}.hidden{display:none!important}.summary{border-top:1px solid #555;margin-top:18px;padding-top:12px;line-height:1.7}.status{min-height:24px;line-height:1.5}.service-book{margin-top:16px;background:transparent;color:#d6b77b;border:1px solid #d6b77b;border-radius:8px;padding:12px;width:100%;font-weight:bold;cursor:pointer}
+</style>
 </head>
-
 <body>
-  <header>
-    <img
-      class="logo"
-      src="./file_00000000a588720c9110012324fce92d.png"
-      alt="Patria y Vida Mobile Detailing LLC logo"
-    >
-
-    <h1>Patria y Vida Mobile Detailing LLC</h1>
-    <p class="tagline">Freedom in every detail</p>
-  </header>
-
-  <main>
-    <h2>Our Services &amp; Prices</h2>
-
-    <p id="status" class="message">
-      Loading services...
-    </p>
-
-    <div id="services"></div>
-
-    <a
-      class="booking"
-      href="https://squareup.com/appointments/book/L3XMGN36HM3RP/start"
-    >
-      Book Your Appointment
-    </a>
-  </main>
-
-  <footer>
-    Freedom in every detail
-  </footer>
-
-  <script>
-    const BASE =
-      "https://uwnqixujbmftqzcvjfpw.supabase.co";
-
-    const KEY =
-      "sb_publishable_5F9HbgTARRJZOUOQhsvLtw_PyAaayX0";
-
-    const headers = {
-      "apikey": KEY
-    };
-
-    async function getData(table) {
-      const response = await fetch(
-        BASE + "/rest/v1/" + table + "?select=*",
-        { headers }
-      );
-
-      if (!response.ok) {
-        throw new Error("Could not load " + table);
-      }
-
-      return response.json();
-    }
-
-    function addText(parent, tag, value) {
-      const element = document.createElement(tag);
-      element.textContent = value;
-      parent.appendChild(element);
-      return element;
-    }
-
-    function normalizeVehicle(value) {
-      return String(value || "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, "");
-    }
-
-    function getVehicleCategory(value) {
-      const name = normalizeVehicle(value);
-
-      if (name.includes("sedan")) {
-        return 0;
-      }
-
-      if (
-        name.includes("cargo") ||
-        name.includes("van")
-      ) {
-        return 3;
-      }
-
-      if (
-        name.includes("truck") ||
-        name.includes("3rows") ||
-        name.includes("thirdrow")
-      ) {
-        return 2;
-      }
-
-      if (
-        name.includes("suv") ||
-        name.includes("2rows")
-      ) {
-        return 1;
-      }
-
-      return 99;
-    }
-
-    const vehicleLabels = [
-      "Sedan",
-      "SUV (2 Rows of Seats)",
-      "Truck/SUV (3 Rows of Seats)",
-      "Cargo Vans"
-    ];
-
-    function sortVehiclePrices(a, b) {
-      return (
-        getVehicleCategory(a.vehicle_type) -
-        getVehicleCategory(b.vehicle_type)
-      );
-    }
-
-    function displayPrice(card, label, amount) {
-      if (
-        amount === null ||
-        amount === undefined ||
-        amount === ""
-      ) {
-        return;
-      }
-
-      const number = Number(amount);
-
-      if (!Number.isFinite(number)) {
-        return;
-      }
-
-      const line = document.createElement("div");
-      line.className = "price";
-
-      addText(line, "span", label);
-
-      addText(
-        line,
-        "strong",
-        "$" + number.toFixed(2)
-      );
-
-      card.appendChild(line);
-    }
-
-    async function loadServices() {
-      const container =
-        document.getElementById("services");
-
-      const status =
-        document.getElementById("status");
-
-      try {
-        const [services, prices] =
-          await Promise.all([
-            getData("services"),
-            getData("service_prices")
-          ]);
-
-        container.replaceChildren();
-        status.textContent = "";
-
-        if (!services.length) {
-          status.textContent =
-            "Services coming soon.";
-          return;
-        }
-
-        for (const service of services) {
-          const card =
-            document.createElement("section");
-
-          card.className = "service";
-
-          addText(
-            card,
-            "h3",
-            service.name || "Service"
-          );
-
-          // Service photo from Supabase
-          if (service.image_url) {
-            const photo =
-              document.createElement("img");
-
-            photo.className = "service-photo";
-            photo.src = service.image_url;
-            photo.alt =
-              service.name || "Detailing service";
-            photo.loading = "lazy";
-
-            photo.onerror = function () {
-              photo.style.display = "none";
-            };
-
-            card.appendChild(photo);
-          }
-
-          if (service.description) {
-            addText(
-              card,
-              "p",
-              service.description
-            );
-          }
-
-          const matching = prices
-            .filter(
-              item =>
-                String(item.service_id) ===
-                String(service.id)
-            )
-            .sort(sortVehiclePrices);
-
-          if (matching.length === 0) {
-            displayPrice(
-              card,
-              "Fixed Price",
-              service.price
-            );
-          }
-
-          for (const item of matching) {
-            const category =
-              getVehicleCategory(
-                item.vehicle_type
-              );
-
-            const label =
-              vehicleLabels[category] ||
-              item.vehicle_type ||
-              "Vehicle";
-
-            displayPrice(
-              card,
-              label,
-              item.price
-            );
-          }
-
-          container.appendChild(card);
-        }
-
-      } catch (error) {
-        status.textContent =
-          "Services are temporarily unavailable. Please try again later.";
-
-        console.error(error);
-      }
-    }
-
-    loadServices();
-  </script>
-</body>
-</html>
+<header><img class="logo" src="./file_00000000a588720c9110012324fce92d.png" alt="Patria y Vida Mobile Detailing LLC logo"><h1>Patria y Vida Mobile Detailing LLC</h1><p class="tagline">Freedom in every detail</p></header>
+<main>
+<h2>Our Services &amp; Prices</h2><p id="status" class="message">Loading services...</p><div id="services"></div>
+<a class="booking" href="#booking-form">Request Your Appointment</a>
+<section id="booking-form" class="booking-panel" aria-labelledby="booking-heading">
+<h2 id="booking-heading">Request Your Appointment</h2>
+<p class="note">Choose your service, vehicle, preferred date and time. Your request must be approved before your appointment is confirmed.</p>
+<form id="request-form">
+<label for="service-select">Service</label><select id="service-select" required><option value="">Select a service</option></select>
+<label for="vehicle-select">Vehicle type / price</label><select id="vehicle-select" required disabled><option value="">Select a service first</option></select>
+<label for="date">Preferred date</label><input id="date" type="date" required>
+<label for="time">Preferred time</label><input id="time" type="time" required>
+<label for="first-name">First name</label><input id="first-name" autocomplete="given-name" required maxlength="80">
+<label for="last-name">Last name</label><input id="last-name" autocomplete="family-name" required maxlength="80">
+<label for="email">Email</label><input id="email" type="email" autocomplete="email" required maxlength="254">
+<label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel" required maxlength="40">
+<label for="address">Service address</label><textarea id="address" autocomplete="street-address" required maxlength="500"></textarea>
+<label for="notes">Additional notes (optional)</label><textarea id="notes" maxlength="1000" placeholder="Vehicle details, access instructions, or other requests"></textarea>
+<div id="price-summary" class="summary">Select a service and vehicle to see the price.</div>
+<p class="warning">A $20 deposit will be authorized on your card once secure payments are enabled. It will only be captured if your appointment is approved. No payment is collected on this page yet.</p>
+<button class="primary" type="submit" id="submit-request" disabled>Online requests coming soon</button>
+<p id="form-status" class="status" role="status" aria-live="polite">Online appointment requests are being connected. Please check back soon.</p>
+</form></section>
+</main><footer>Freedom in every detail</footer>
+<script>
+const BASE="https://uwnqixujbmftqzcvjfpw.supabase.co";
+const KEY="sb_publishable_5F9HbgTARRJZOUOQhsvLtw_PyAaayX0";
+const headers={apikey:KEY};
+let serviceList=[],priceList=[];
+async function getData(table){const response=await fetch(BASE+"/rest/v1/"+table+"?select=*",{headers});if(!response.ok)throw new Error("Could not load "+table);return response.json()}
+function addText(parent,tag,value){const element=document.createElement(tag);element.textContent=value;parent.appendChild(element);return element}
+function normalizeVehicle(value){return String(value||"").toLowerCase().replace(/[^a-z0-9]/g,"")}
+function getVehicleCategory(value){const name=normalizeVehicle(value);if(name.includes("sedan"))return 0;if(name.includes("cargo")||name.includes("van"))return 3;if(name.includes("truck")||name.includes("3rows")||name.includes("thirdrow"))return 2;if(name.includes("suv")||name.includes("2rows"))return 1;return 99}
+const vehicleLabels=["Sedan","SUV (2 Rows of Seats)","Truck/SUV (3 Rows of Seats)","Cargo Vans"];
+function sortVehiclePrices(a,b){return getVehicleCategory(a.vehicle_type)-getVehicleCategory(b.vehicle_type)}
+function money(amount){return "$"+Number(amount).toFixed(2)}
+function displayPrice(card,label,amount){if(amount===null||amount===undefined||amount==="")return;const number=Number(amount);if(!Number.isFinite(number))return;const line=document.createElement("div");line.className="price";addText(line,"span",label);addText(line,"strong",money(number));card.appendChild(line)}
+function matchingPrices(service){return priceList.filter(item=>String(item.service_id)===String(service.id)).sort(sortVehiclePrices)}
+function option(select,value,label){const el=document.createElement("option");el.value=value;el.textContent=label;select.appendChild(el)}
+function populateServices(){const select=document.getElementById("service-select");select.replaceChildren();option(select,"","Select a service");for(const service of serviceList)option(select,String(service.id),service.name||"Service")}
+function populateVehicles(){const service=serviceList.find(item=>String(item.id)===document.getElementById("service-select").value);const select=document.getElementById("vehicle-select");select.replaceChildren();option(select,"","Select a vehicle / price");select.disabled=!service;if(service){const matching=matchingPrices(service);if(matching.length){matching.forEach((item,index)=>{const category=getVehicleCategory(item.vehicle_type);const label=vehicleLabels[category]||item.vehicle_type||"Vehicle";if(item.price!==null&&item.price!==undefined&&Number.isFinite(Number(item.price)))option(select,String(index),label+" — "+money(item.price))})}else if(service.price!==null&&service.price!==undefined&&Number.isFinite(Number(service.price))){option(select,"fixed","Fixed Price — "+money(service.price))}else{option(select,"quote","Price to be confirmed")}}updateSummary()}
+function updateSummary(){const service=serviceList.find(item=>String(item.id)===document.getElementById("service-select").value);const selection=document.getElementById("vehicle-select").value;const summary=document.getElementById("price-summary");if(!service||!selection){summary.textContent="Select a service and vehicle to see the price.";return}let price=null;if(selection==="fixed")price=Number(service.price);else if(selection!=="quote"){const row=matchingPrices(service)[Number(selection)];if(row)price=Number(row.price)}summary.textContent=service.name+" — "+(price!==null&&Number.isFinite(price)?"Service price: "+money(price)+". Deposit: $20.00. Remaining after deposit: "+money(Math.max(0,price-20))+".":"Price to be confirmed. Deposit: $20.00, subject to approval.")}
+async function loadServices(){const container=document.getElementById("services"),status=document.getElementById("status");try{const [services,prices]=await Promise.all([getData("services"),getData("service_prices")]);serviceList=services;priceList=prices;container.replaceChildren();status.textContent="";if(!services.length){status.textContent="Services coming soon.";return}for(const service of services){const card=document.createElement("section");card.className="service";addText(card,"h3",service.name||"Service");if(service.image_url){const photo=document.createElement("img");photo.className="service-photo";photo.src=service.image_url;photo.alt=service.name||"Detailing service";photo.loading="lazy";photo.onerror=function(){photo.style.display="none"};card.appendChild(photo)}if(service.description)addText(card,"p",service.description);const matching=matchingPrices(service);if(!matching.length)displayPrice(card,"Fixed Price",service.price);for(const item of matching){const category=getVehicleCategory(item.vehicle_type);displayPrice(card,vehicleLabels[category]||item.vehicle_type||"Vehicle",item.price)}const button=document.createElement("button");button.className="service-book";button.type="button";button.textContent="Select this service";button.addEventListener("click",()=>{document.getElementById("service-select").value=String(service.id);populateVehicles();document.getElementById("booking-form").scrollIntoView({behavior:"smooth"})});card.appendChild(button);container.appendChild(card)}populateServices()}catch(error){status.textContent="Services are temporarily unavailable. Please try again later.";console.error(error)}}
+document.getElementById("service-select").addEventListener("change",populateVehicles);
+document.getElementById("vehicle-select").addEventListener("change",updateSummary);
+document.getElementById("request-form").addEventListener("submit",event=>{event.preventDefault();document.getElementById("form-status").textContent="Online requests are not enabled yet. No booking or payment has been submitted."});
+const today=new Date();const localDate=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);document.getElementById("date").min=localDate;
+loadServices();
+</script>
+</body></html>
